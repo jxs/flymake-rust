@@ -19,13 +19,13 @@
 (defconst flymake-rust-err-line-patterns
   '(("^\\(.*\.rs\\):\\([0-9]+\\):[0-9]+: [0-9]+:[0-9]+\\(.*\\)$" 1 2 nil 3)))
 
-(defvar flymake-rust-executable "rustc"
+(defvar flymake-rust-executable "env"
   "The rust executable to use for syntax checking.")
 
 ;; Invoke rust "--parse-only" to get syntax checking
 (defun flymake-rust-command (filename)
   "Construct a command that flymake can use to check rust source."
-  (list flymake-rust-executable "--parse-only" filename))
+  (list flymake-rust-executable "TERM=dumb" "rustc" "--parse-only" filename))
 
 ;; Load rust-flymake
 (defun flymake-rust-load ()
