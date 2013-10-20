@@ -17,7 +17,8 @@
 (require 'flymake-easy)
 
 (defconst flymake-rust-err-line-patterns
-  '(("^\\(.*\.rs\\):\\([0-9]+\\):[0-9]+: [0-9]+:[0-9]+\\(.*\\)$" 1 2 nil 3)))
+  '(("^\\(.*.rs\\):\\([0-9]+\\):[0-9]+: [0-9]+:[0-9]+ [a-z]+: \\(.*\\)$" 1 2 nil 3))
+  '(("^\\(.*.rs\\):\\([0-9]+\\) \\(.*\\)$" 1 2 nil 3)))
 
 (defvar flymake-rust-executable "env"
   "The rust executable to use for syntax checking.")
