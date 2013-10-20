@@ -26,7 +26,7 @@
 ;; Invoke rust "--parse-only" to get syntax checking
 (defun flymake-rust-command (filename)
   "Construct a command that flymake can use to check rust source."
-  (list "env" "TERM=dumb" flymake-rust-executable filename))
+(list "env" "TERM=dumb" flymake-rust-executable "--no-trans" filename))
 
 ;; Load rust-flymake
 (defun flymake-rust-load ()
