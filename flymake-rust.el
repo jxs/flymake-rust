@@ -20,13 +20,13 @@
   '(("^\\(.*.rs\\):\\([0-9]+\\):[0-9]+: [0-9]+:[0-9]+ [a-z]+: \\(.*\\)$" 1 2 nil 3))
   '(("^\\(.*.rs\\):\\([0-9]+\\) \\(.*\\)$" 1 2 nil 3)))
 
-(defvar flymake-rust-executable "env"
+(defvar flymake-rust-executable "rustc"
   "The rust executable to use for syntax checking.")
 
 ;; Invoke rust "--parse-only" to get syntax checking
 (defun flymake-rust-command (filename)
   "Construct a command that flymake can use to check rust source."
-  (list flymake-rust-executable "TERM=dumb" "rustc" filename))
+  (list "env" "TERM=dumb" flymake-rust-executable filename))
 
 ;; Load rust-flymake
 (defun flymake-rust-load ()
