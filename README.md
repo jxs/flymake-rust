@@ -2,7 +2,7 @@ flymake-rust.el
 ==========================
 
 An Emacs flymake handler for syntax-checking Rust source code
-using `rustc`
+using `rustc`.
 
 Installation
 =============
@@ -19,8 +19,7 @@ Usage
 Add the following to your emacs init file:
 
     (require 'flymake-rust)
-    (add-hook 'rust-mode-hook 'rust-coffee-load)
-
+    (add-hook 'rust-mode-hook 'flymake-rust-load)
 
 [marmalade]: http://marmalade-repo.org
 [melpa]: http://melpa.milkbox.net
