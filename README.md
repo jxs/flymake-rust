@@ -2,7 +2,7 @@ flymake-rust.el
 ==========================
 
 An Emacs flymake handler for syntax-checking Rust source code
-using `rustc`.
+using `cargo` or `rustc`.
 
 Installation
 =============
@@ -20,6 +20,14 @@ Add the following to your emacs init file:
 
     (require 'flymake-rust)
     (add-hook 'rust-mode-hook 'flymake-rust-load)
+
+Checker uses `cargo` by-default. If you want to use `rustc` compiler,
+you must add following strings:
+
+    (setq flymake-rust-use-cargo nil)
+    (require 'flymake-rust)
+    (add-hook 'rust-mode-hook 'flymake-rust-load)
+
 
 [marmalade]: http://marmalade-repo.org
 [melpa]: http://melpa.milkbox.net

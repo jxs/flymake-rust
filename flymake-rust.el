@@ -10,6 +10,9 @@
 ;;   (require 'flymake-rust)
 ;;   (add-hook 'rust-mode-hook 'flymake-rust-load)
 ;;
+;; If you want to use rustc compiler, you must add following string:
+;;   (setq flymake-rust-use-cargo 1)
+;;
 ;; Uses flymake-easy, from https://github.com/purcell/flymake-easy
 
 ;;; Code:
@@ -20,13 +23,23 @@
   '(("^\\(.*.rs\\):\\([0-9]+\\):[0-9]+: [0-9]+:[0-9]+ [a-z]+: \\(.*\\)$" 1 2 nil 3))
   '(("^\\(.*.rs\\):\\([0-9]+\\) \\(.*\\)$" 1 2 nil 3)))
 
-(defvar flymake-rust-executable "rustc"
-  "The rust executable to use for syntax checking.")
+(setq-default flymake-rust-use-cargo 1)
+
+(if flymake-rust-use-cargo
+    (defvar flymake-rust-executable "cargo"
+      "The rust executable to use for syntax checking.")
+    (defvar flymake-rust-executable "rustc"
+      "The rust executable to use for syntax checking.")
+)
 
 ;; Invoke rust "--parse-only" to get syntax checking
 (defun flymake-rust-command (filename)
   "Construct a command that flymake can use to check rust source."
-(list flymake-rust-executable "--no-trans" filename))
+  (if flymake-rust-use-cargo
+      (list flymake-rust-executable "build")
+      (list flymake-rust-executable "--no-trans" filename)
+      )
+  )
 
 ;; Load rust-flymake
 (defun flymake-rust-load ()
